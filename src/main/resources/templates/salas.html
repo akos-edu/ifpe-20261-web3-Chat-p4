@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Salas - Chat IFPE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body class="min-h-screen flex flex-col" style="background-color:#f4f8f5;color:#26352b;">
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="flex-1 p-6 max-w-5xl mx-auto w-full">
+    <h1 class="text-2xl font-bold mb-6" style="color:#1f6f43;">Escolha a sala do seu período</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a th:each="sala : ${salas}" th:href="@{'/chat/' + ${sala.id}}"
+           class="card bg-base-100 shadow-md border-l-4 hover:shadow-lg hover:-translate-y-1 transition"
+           style="border-color:#2e8b57;">
+            <div class="card-body">
+                <h2 class="card-title" style="color:#1f6f43;">🎓 <span th:text="${sala.nome}">Período</span></h2>
+                <p class="text-sm" style="color:#66736a;">Entrar na sala de bate-papo</p>
+            </div>
+        </a>
+    </div>
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

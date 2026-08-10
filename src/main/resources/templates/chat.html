@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Sala ' + ${sala.nome} + ' - Chat IFPE'">Sala - Chat IFPE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+</head>
+<body class="min-h-screen flex flex-col" style="background-color:#f4f8f5;color:#26352b;">
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="flex-1 p-4 max-w-3xl mx-auto w-full flex flex-col">
+    <div class="flex items-center justify-between mb-4">
+        <h1 class="text-xl font-bold" style="color:#1f6f43;">
+            🎓 <span th:text="${sala.nome}">Período</span>
+        </h1>
+        <a th:href="@{/salas}" class="btn btn-sm btn-outline" style="border-color:#2e8b57;color:#2e8b57;">Trocar de sala</a>
+    </div>
+
+    <div id="chat-log"
+         class="card bg-base-100 shadow-md border-l-4 flex-1 p-4 overflow-y-auto mb-3"
+         style="border-color:#2e8b57; min-height:22rem; max-height:60vh;">
+    </div>
+
+    <form id="form-envio" class="flex gap-2">
+        <input id="campo-mensagem" type="text" autocomplete="off" placeholder="Digite sua mensagem..."
+               class="input input-bordered flex-1 focus:ring focus:ring-[#2e8b57]"/>
+        <button type="submit" class="btn text-white" style="background-color:#2e8b57;">Enviar</button>
+    </form>
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+<script th:inline="javascript">
+    const SALA_ID = /*[[${sala.id}]]*/ '1';
+    const USUARIO = /*[[${usuario}]]*/ 'aluno';
+</script>
+<script th:src="@{/js/chat.js}"></script>
+</body>
+</html>

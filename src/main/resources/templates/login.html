@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Entrar - Chat IFPE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body class="min-h-screen flex flex-col" style="background-color:#f4f8f5;color:#26352b;">
+
+<div th:replace="~{fragments/layout :: header}"></div>
+
+<main class="flex-1 flex items-center justify-center p-4">
+    <div class="card w-full max-w-sm bg-base-100 shadow-md border-l-4" style="border-color:#2e8b57;">
+        <div class="card-body">
+            <h1 class="card-title font-bold" style="color:#1f6f43;">Entrar</h1>
+
+            <p th:if="${param.error}" class="text-sm p-2 rounded" style="background-color:#f8dddd;color:#a33a3a;">
+                E-mail ou senha inválidos.
+            </p>
+            <p th:if="${param.registrado}" class="text-sm p-2 rounded" style="background-color:#edf6f0;color:#1f6f43;">
+                Cadastro realizado! Faça login para continuar.
+            </p>
+            <p th:if="${param.logout}" class="text-sm p-2 rounded" style="background-color:#edf6f0;color:#1f6f43;">
+                Sessão encerrada.
+            </p>
+
+            <form th:action="@{/login}" method="post" class="flex flex-col gap-3 mt-2">
+                <label class="form-control">
+                    <span class="label-text font-bold" style="color:#26352b;">E-mail</span>
+                    <input type="email" name="username" required class="input input-bordered focus:ring focus:ring-[#2e8b57]"/>
+                </label>
+                <label class="form-control">
+                    <span class="label-text font-bold" style="color:#26352b;">Senha</span>
+                    <input type="password" name="password" required class="input input-bordered focus:ring focus:ring-[#2e8b57]"/>
+                </label>
+                <button type="submit" class="btn text-white mt-2" style="background-color:#2e8b57;">Entrar</button>
+            </form>
+
+            <p class="text-sm mt-3" style="color:#66736a;">
+                Ainda não tem conta? <a th:href="@{/registro}" class="font-bold" style="color:#1f6f43;">Cadastre-se</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

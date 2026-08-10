@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<header th:fragment="header" class="navbar shadow-md" style="background-color:#1f6f43;">
+    <div class="flex-1">
+        <a href="/salas" class="text-xl font-bold text-white">💬 Chat IFPE</a>
+    </div>
+    <div class="flex-none gap-3" sec:authorize="isAuthenticated()">
+        <span class="text-white">Olá, <span sec:authentication="name">aluno</span></span>
+        <form th:action="@{/logout}" method="post" class="inline">
+            <button type="submit"
+                    class="btn btn-outline btn-sm text-white border-white hover:bg-white hover:text-[#1f6f43]">
+                Sair
+            </button>
+        </form>
+    </div>
+    <div class="flex-none" sec:authorize="isAnonymous()">
+        <a href="/login" class="btn btn-outline btn-sm text-white border-white hover:bg-white hover:text-[#1f6f43]">Login</a>
+    </div>
+</header>
+
+<footer th:fragment="footer" class="footer footer-center p-4 text-sm" style="background-color:#173f29;color:#f4f8f5;">
+    <p>Chat IFPE &mdash; Sistema de bate-papo por período &middot; Projeto acadêmico &middot; 2026</p>
+</footer>
+
+</body>
+</html>
